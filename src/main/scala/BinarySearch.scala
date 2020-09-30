@@ -33,6 +33,12 @@ object BinarySearch {
         }
       }
       fSource.close()
+      for(i<-temps) println(i)
+      println("******************")
+      val sortedArray=temps.sorted
+      for(i<-sortedArray) println(i)
+      val checkName=readLine("Enter a name to check if present or not:")
+      if (sortedArray.contains(checkName)){println(s"The ->$checkName<- is present in the file $fname")}
     }
     catch {
       case _:java.io.FileNotFoundException=>println("file not found")

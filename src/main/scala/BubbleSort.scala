@@ -1,31 +1,51 @@
 import scala.io.StdIn.readLine
 
 object BubbleSort {
-  def bSort(arr: Array[Int]): Unit = {
-    val number = arr.length
-    for (loopArray <- 0 until number - 1) {
-      for (intialValue <- 0 until number - loopArray - 1) {
-        if (arr(intialValue) > arr(intialValue + 1)) { // swap arr[intialValue+1] and arr[loopArray]
-          val temp = arr(intialValue)
-          arr(intialValue) = arr(intialValue + 1)
-          arr(intialValue + 1) = temp
+  //function to sort array
+  def bubbleSort(myArray: Array[Int]): Unit = {
+    val arrayLength = myArray.length
+    for (loopArray <- 0 until arrayLength - 1) {
+      for (intialValue <- 0 until arrayLength - loopArray - 1) {
+        if (myArray(intialValue) > myArray(intialValue + 1)) {  // swap myArray[intialValue+1] and myArray[loopArray]
+          val swapValue = myArray(intialValue)
+          myArray(intialValue) = myArray(intialValue + 1)
+          myArray(intialValue + 1) = swapValue
         }
       }
     }
   }
-  /* A utility function to print array of size number*/
-  def printArray(arr: Array[Int]): Unit = {
-    val number2 = arr.length
-    for (loopArray <- 0 until number2) {
-      print(arr(loopArray) + " ")
+  /* function to print array of size arrayLength*/
+  def printArray(myArray: Array[Int]): Unit = {
+    val arrayLength = myArray.length                             
+    for (loopArray <- 0 until arrayLength) {
+      print(myArray(loopArray) + " ")
     }
-    println()
   }
+
   def main(args: Array[String]): Unit = {
-    val number1=readLine("Enter the number of Values you want to input:").toInt
-    val arr=new Array[Int](number1)
-    for (loopArray <- 0 until number1){arr(loopArray)=readLine(s"Number$loopArray").toInt}
-    bSort(arr)
-    printArray(arr)
+    var numOfInputs: Int = 0
+    var check=true
+    while (check) {
+      try {
+        numOfInputs = readLine("Enter the number of values you want to input:").toInt
+        check=false
+      } catch {
+        case _: NumberFormatException => print("Enter only number\n")
+      }
+    }
+    val myArray=new Array[Int](numOfInputs)
+    for (loopArray <- 0 until numOfInputs){
+      var check = true
+      while(check){
+        try {
+          myArray(loopArray) = readLine(s"Number$loopArray").toInt
+          check=false
+        } catch {
+          case _: NumberFormatException => print("Enter only number\n")
+        }
+      }
+    }
+    bubbleSort(myArray)
+    printArray(myArray)
   }
 }
